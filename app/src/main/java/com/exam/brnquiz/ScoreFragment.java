@@ -13,6 +13,8 @@ import android.view.ViewGroup;
  */
 public class ScoreFragment extends Fragment {
 
+    //holds two text views which have the score
+
     public ScoreFragment() {
         // Required empty public constructor
     }

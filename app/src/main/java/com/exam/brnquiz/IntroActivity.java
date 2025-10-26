@@ -9,6 +9,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class IntroActivity extends AppCompatActivity {
+    // the class it opens with the begin button (activity_main layout)
+    // the main activity in manifest
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
