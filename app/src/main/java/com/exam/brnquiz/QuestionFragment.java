@@ -4,6 +4,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class QuestionFragment extends Fragment {
 
@@ -23,6 +26,7 @@ public class QuestionFragment extends Fragment {
     private ArrayList<Question> questionList;
     private int currentIndex = 0;
     private int correctCount = 0;
+    private QuizViewModel sharedViewModel;
 
     public QuestionFragment() {
         // Required empty public constructor
@@ -42,10 +46,11 @@ public class QuestionFragment extends Fragment {
         questionList.add(new Question("What is my favorite color?", answer1List, 1)); // blue
 
         ArrayList<String> answer2List = new ArrayList<>();
-        answer2List.add("hi");
-        answer2List.add("hello");
-        answer2List.add("hey");
-        questionList.add(new Question("What is my favorite greeting?", answer2List, 2)); // hey
+        answer2List.add("Medellin");
+        answer2List.add("Madrid");
+        answer2List.add("Paris");
+        answer2List.add("Bogota");
+        questionList.add(new Question("What is the capital of Colombia?", answer2List, 3)); // hey
     }
 
     @Override
@@ -57,6 +62,11 @@ public class QuestionFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        sharedViewModel = new ViewModelProvider(requireActivity()).get(QuizViewModel.class);
+
+        sharedViewModel.getCurrent().observe(getViewLifecycleOwner(), observer);
+
 
         questionText = view.findViewById(R.id.questionTextView);
         list = view.findViewById(R.id.listView);
@@ -94,5 +104,18 @@ public class QuestionFragment extends Fragment {
             currentIndex++;
             displayQuestion();
         });
+
+        sharedViewModel.setAnswer(correctCount);
+        sharedViewModel.addInt(correctCount);
     }
-}
+
+
+    Observer<Question> observer = new Observer<Question>() {
+        @Override
+        public void onChanged(Question question) {
+            sharedViewModel.setCurrent(question); //updates current
+
+        }
+    }; // end obserever
+
+} // last bracket
