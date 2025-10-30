@@ -95,9 +95,9 @@ public class QuestionFragment extends Fragment {
         list.setOnItemClickListener((parent, itemView, position, id) -> {
             if (position == current.correctIndex) {
                 correctCount++;
-                Toast.makeText(requireContext(), "Correct!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), "Yay + one point!", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(requireContext(), "Wrong!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), "Wrong use your brn(ai)!", Toast.LENGTH_SHORT).show();
             }
 
             // Move to next question

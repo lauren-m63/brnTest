@@ -61,6 +61,7 @@ public class ScoreFragment extends Fragment {
             //int mo = sharedViewModel.getAnswerInt();
             //score.setText(mo);
             // i cant figure out how to update the score when my varibale is mutable live data
+            // the score never updates but i got the observer registered which was the task
 
         }
     }; // end obserever
